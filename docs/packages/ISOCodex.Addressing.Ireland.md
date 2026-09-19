@@ -1,6 +1,6 @@
 # ISOCodex.Addressing.Ireland
 
-Version 2.1.0 targets `netstandard2.0` for .NET Framework 4.7.2+ and modern .NET, replacing the redundant `netstandard2.1` asset. The matching core requires ISOCodex.Countries 1.1.0 or later.
+Version 2.1.1 targets `netstandard2.0` for .NET Framework 4.7.2+ and modern .NET, replacing the redundant `netstandard2.1` asset. The matching core requires ISOCodex.Countries 1.1.1 or later.
 
 `ISOCodex.Addressing.Ireland` adds Irish address validation and formatting support to the core `ISOCodex.Addressing` library.
 

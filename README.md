@@ -6,10 +6,10 @@ This is the public documentation and issue tracker. The library implementation a
 
 ## Install
 
-Current release: **2.1.0**. [View on NuGet](https://www.nuget.org/packages/ISOCodex.Addressing/2.1.0).
+Current release: **2.1.1**. [View on NuGet](https://www.nuget.org/packages/ISOCodex.Addressing/2.1.1).
 
 ```powershell
-dotnet add package ISOCodex.Addressing --version 2.1.0
+dotnet add package ISOCodex.Addressing --version 2.1.1
 ```
 
 ## What it provides

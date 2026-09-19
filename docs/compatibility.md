@@ -1,6 +1,6 @@
 # Package compatibility
 
-The current coordinated versions are Countries **1.1.0**, Addressing **2.1.0** and Currency **1.1.0**.
+The current coordinated versions are Countries **1.1.1**, Addressing **2.1.1** and Currency **1.1.1**. These documentation and metadata patches preserve the targets and public APIs introduced by the 1.1.0 / 2.1.0 compatibility release.
 
 | Packages | Supported applications |
 | --- | --- |
