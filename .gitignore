@@ -1,0 +1,7 @@
+# Documentation only. Review the private export allowlist before adding files.
+*
+!*/
+!*.md
+!LICENSE
+!.gitignore
+!assets/*.png
