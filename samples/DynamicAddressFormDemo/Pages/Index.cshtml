@@ -3,7 +3,7 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Dynamic address form";
-    ViewData["Description"] = "A portfolio-ready demonstration of profile-driven address fields, country validation and postal formatting for Spain, France and Ireland.";
+    ViewData["Description"] = "Try address fields, validation and formatting for Spain, France and Ireland using ISOCodex.Addressing.";
     var activeFields = Model.Profile.Fields.Count(field => field.IsUsed && field.Field != AddressField.Country);
     var requiredFields = Model.Profile.Fields.Count(field => field.IsUsed && field.IsRequired && field.Field != AddressField.Country);
     var statusClass = Model.Status switch
@@ -20,12 +20,12 @@
      data-portfolio-state="@Model.Status.ToLowerInvariant()">
 <section class="demo-hero">
     <div>
-        <p class="eyebrow">Profile-driven address entry</p>
-        <h1>One form.<br />The right local shape.</h1>
+        <p class="eyebrow">ISOCodex / Addressing</p>
+        <h1>Country-aware<br />address form</h1>
     </div>
     <p class="demo-hero__summary">
-        Switch country or scenario to see field order, terminology, options,
-        validation and formatting adapt through the public addressing APIs.
+        Try an address from Spain, France or Ireland. The country profile sets
+        the fields; the validator checks the address and the formatter lays it out.
     </p>
 </section>
 
@@ -33,13 +33,13 @@
     <div class="scenario-panel__intro">
         <span class="step-number" aria-hidden="true">01</span>
         <div>
-            <h2 id="scenario-heading">Choose a scenario</h2>
-            <p>Samples run immediately. Edit any field and validate again.</p>
+            <h2 id="scenario-heading">Load a sample</h2>
+            <p>Choosing a sample replaces the form and runs validation.</p>
         </div>
     </div>
     <form method="get" class="scenario-controls">
         <div class="field-group">
-            <label class="form-label" for="country">Country profile</label>
+            <label class="form-label" for="country">Country</label>
             <div class="select-shell">
                 <select id="country" name="CountryCode" class="form-select" onchange="this.form.submit()">
                     @foreach (var country in Model.Countries)
@@ -50,10 +50,10 @@
             </div>
         </div>
         <div class="field-group field-group--wide">
-            <label class="form-label" for="sample">Validation scenario</label>
+            <label class="form-label" for="sample">Sample address</label>
             <div class="select-shell">
                 <select id="sample" name="SampleId" class="form-select" onchange="this.form.submit()">
-                    <option value="">Start with a blank form</option>
+                    <option value="">Blank form</option>
                     @foreach (var sample in Model.Samples.Where(sample => sample.CountryCode == Model.CountryCode))
                     {
                         <option value="@sample.Id" selected="@(sample.Id == Model.SampleId)">@sample.Name</option>
@@ -69,12 +69,8 @@
         <div class="panel-heading">
             <span class="step-number" aria-hidden="true">02</span>
             <div>
-                <p class="panel-kicker">@Model.CountryCode · @Model.CountryName</p>
-                <h2 id="address-heading">Local address fields</h2>
-            </div>
-            <div class="profile-stats" aria-label="Profile field summary">
-                <span><strong>@activeFields</strong> fields</span>
-                <span><strong>@requiredFields</strong> required</span>
+                <p class="panel-kicker">@Model.CountryName / @Model.CountryCode</p>
+                <h2 id="address-heading">Edit the address</h2>
             </div>
         </div>
 
@@ -105,6 +101,12 @@
                     _ => ""
                 };
                 var issueText = Model.IssueTextFor(inputName);
+                var hasIssue = !string.IsNullOrWhiteSpace(issueText);
+                var descriptionIds = string.Join(" ", new[]
+                {
+                    !string.IsNullOrWhiteSpace(field.HelpText) ? $"{inputName}-help" : null,
+                    hasIssue ? $"{inputName}-error" : null
+                }.Where(id => id is not null));
 
                 if (field.Field == AddressField.Country)
                 {
@@ -122,7 +124,8 @@
                     </label>
                     @if (field.InputKind == AddressFieldInputKind.Select)
                     {
-                        <select id="@inputName" name="@fullName" class="form-select @(string.IsNullOrWhiteSpace(issueText) ? "" : "is-invalid")">
+                        <select id="@inputName" name="@fullName" class="form-select @(hasIssue ? "is-invalid" : "")"
+                                aria-required="@field.IsRequired.ToString().ToLowerInvariant()" aria-invalid="@hasIssue.ToString().ToLowerInvariant()" aria-describedby="@descriptionIds">
                             <option value="">Select...</option>
                             @foreach (var option in field.Options)
                             {
@@ -132,21 +135,22 @@
                     }
                     else
                     {
-                        <input id="@inputName" name="@fullName" value="@value" placeholder="@field.Placeholder" class="form-control @(string.IsNullOrWhiteSpace(issueText) ? "" : "is-invalid")" />
+                        <input id="@inputName" name="@fullName" value="@value" placeholder="@field.Placeholder" class="form-control @(hasIssue ? "is-invalid" : "")"
+                               aria-required="@field.IsRequired.ToString().ToLowerInvariant()" aria-invalid="@hasIssue.ToString().ToLowerInvariant()" aria-describedby="@descriptionIds" />
                     }
                     @if (!string.IsNullOrWhiteSpace(field.HelpText))
                     {
-                        <div class="form-text">@field.HelpText</div>
+                        <div class="form-text" id="@(inputName)-help">@field.HelpText</div>
                     }
                     @if (!string.IsNullOrWhiteSpace(issueText))
                     {
-                        <div class="invalid-feedback d-block">@issueText</div>
+                        <div class="invalid-feedback d-block" id="@(inputName)-error">@issueText</div>
                     }
                 </div>
             }
 
             <button class="validate-button" type="submit">
-                Validate this address
+                Validate address
                 <span aria-hidden="true">→</span>
             </button>
         </form>
@@ -156,12 +160,9 @@
         <section class="status-panel @statusClass" data-portfolio-region="validation-result">
             <div class="status-panel__heading">
                 <div>
-                    <p class="panel-kicker">Validation result</p>
+                    <p class="panel-kicker">03 / Validation result</p>
                     <h2>@Model.Status</h2>
                 </div>
-                <span class="status-icon" aria-hidden="true">
-                    @(Model.Status == "Valid" ? "✓" : Model.Status == "Invalid" ? "!" : "–")
-                </span>
             </div>
 
             @if (Model.FieldIssues.Count > 0)
@@ -178,21 +179,22 @@
             }
             else if (Model.FormattedPreview is null)
             {
-                <p class="status-panel__empty">Choose a sample or enter an address to exercise the country validator.</p>
+                <p class="status-panel__empty">Enter an address, then select Validate address.</p>
             }
             else
             {
                 <div class="formatted-address">
-                    <p class="formatted-address__label">Formatted for delivery</p>
+                    <p class="formatted-address__label">Formatted address</p>
                     <address>@Model.FormattedPreview</address>
                 </div>
             }
+            <p class="validation-note">Checks structure and format. It does not confirm that an address exists.</p>
         </section>
 
         <section class="profile-panel" data-portfolio-region="profile-evidence">
             <div class="profile-panel__heading">
                 <div>
-                    <p class="panel-kicker">Active profile</p>
+                    <p class="panel-kicker">Country profile</p>
                     <h2>@Model.CountryName</h2>
                 </div>
                 <span class="country-code">@Model.CountryCode</span>
@@ -212,7 +214,7 @@
                 </div>
             </dl>
             <details class="metadata-details">
-                <summary>Inspect raw profile metadata</summary>
+                <summary>View profile JSON</summary>
                 <pre class="profile-json">@Model.RawProfileJson</pre>
             </details>
         </section>

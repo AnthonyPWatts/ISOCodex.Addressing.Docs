@@ -21,12 +21,12 @@ public class IndexModel : PageModel
 
     private static readonly IReadOnlyList<SampleChoice> SampleChoices =
     [
-        new("es-valid", "Spain valid", "ES", "Calle Mayor 10", "3 C", "Madrid", "Madrid", "28013"),
-        new("es-invalid-postal", "Spain invalid postal code", "ES", "Calle Mayor 10", "", "Madrid", "Madrid", "ABC"),
-        new("fr-valid", "France valid", "FR", "10 Rue de Rivoli", "", "Paris", "", "75001"),
-        new("fr-missing-city", "France missing city", "FR", "10 Rue de Rivoli", "", "", "", "75001"),
-        new("ie-valid", "Ireland valid", "IE", "1 College Green", "", "Dublin", "Dublin", "D02 X285"),
-        new("ie-invalid-eircode", "Ireland invalid Eircode", "IE", "1 College Green", "", "Dublin", "Dublin", "BAD CODE")
+        new("es-valid", "Valid address", "ES", "Calle Mayor 10", "3 C", "Madrid", "Madrid", "28013"),
+        new("es-invalid-postal", "Invalid postal code", "ES", "Calle Mayor 10", "", "Madrid", "Madrid", "ABC"),
+        new("fr-valid", "Valid address", "FR", "10 Rue de Rivoli", "", "Paris", "", "75001"),
+        new("fr-missing-city", "Missing city", "FR", "10 Rue de Rivoli", "", "", "", "75001"),
+        new("ie-valid", "Valid address", "IE", "1 College Green", "", "Dublin", "Dublin", "D02 X285"),
+        new("ie-invalid-eircode", "Invalid Eircode", "IE", "1 College Green", "", "Dublin", "Dublin", "BAD CODE")
     ];
 
     private readonly IAddressProfileProvider _profileProvider;

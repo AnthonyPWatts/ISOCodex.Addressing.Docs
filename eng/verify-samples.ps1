@@ -65,6 +65,9 @@ foreach ($project in Get-ChildItem (Join-Path $repoRoot 'samples') -Recurse -Fil
             RedirectStandardError = Join-Path $logs "$name.stderr.log"
         }
         if ($IsWindows) { $start.WindowStyle = 'Hidden' }
+        if ($name -eq 'DynamicAddressFormDemo') {
+            $start.Environment = @{ ASPNETCORE_ENVIRONMENT = 'Production'; DOTNET_ENVIRONMENT = 'Production' }
+        }
         $process = Start-Process @start
         try {
             $ready = $false
@@ -80,9 +83,17 @@ foreach ($project in Get-ChildItem (Join-Path $repoRoot 'samples') -Recurse -Fil
                     if ($valid.Content -notmatch 'data-portfolio-state="valid"' -or $invalid.Content -notmatch 'data-portfolio-state="invalid"') {
                         throw 'The address form did not distinguish valid and invalid samples.'
                     }
-                    foreach ($asset in @('/css/site.css', '/lib/bootstrap/dist/css/bootstrap.min.css', '/lib/jquery/dist/jquery.min.js')) {
-                        $null = Invoke-WebRequest "$uri$asset"
+                    # Follow the rendered (potentially fingerprinted) asset URLs, including scoped CSS.
+                    $stylesheets = [regex]::Matches($valid.Content, '<link\b[^>]*rel="stylesheet"[^>]*href="(/[^\"]+)"')
+                    if ($stylesheets.Count -lt 3) { throw 'The address form did not render its local stylesheets.' }
+                    foreach ($stylesheet in $stylesheets) {
+                        $asset = [Net.WebUtility]::HtmlDecode($stylesheet.Groups[1].Value)
+                        $response = Invoke-WebRequest "$uri$asset"
+                        if ($response.Headers.'Content-Type' -notmatch 'text/css' -or $response.RawContentLength -eq 0) {
+                            throw "The stylesheet was not served as CSS: $asset"
+                        }
                     }
+                    $null = Invoke-WebRequest "$uri/lib/jquery/dist/jquery.min.js"
                 }
                 'CheckoutAddressApi' {
                     $address = @{ line1='10 Downing Street'; city='London'; postalCode='SW1A 2AA'; countryCode='GB' }
