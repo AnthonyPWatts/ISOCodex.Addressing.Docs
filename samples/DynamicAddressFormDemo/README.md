@@ -12,7 +12,9 @@ Open [the Spanish sample](http://localhost:5001/?CountryCode=ES&SampleId=es-vali
 
 All ISOCodex references use published NuGet packages. No private checkout, credentials or project references are needed.
 
-The form follows the typography, colours and layout of [Anthony Watts' site](https://anthonypwatts.co.uk/). It uses your system's light or dark colour scheme. Instrument Sans and IBM Plex Mono load from Google Fonts, with system-font fallbacks when offline.
+The form follows the typography and layout of [Anthony Watts' site](https://anthonypwatts.co.uk/), with a fixed light palette of warm cream and off-white so the demo stands out against a dark portfolio page. Instrument Sans and IBM Plex Mono load from Google Fonts, with system-font fallbacks when offline.
+
+Validation results use a prominent green panel and tick for a valid address, or a red panel and cross for an invalid address. Invalid fields share the red highlight, and the result panel retains the specific validation message. The validator currently reports pass/fail only.
 
 ## Check the form
 
@@ -27,4 +29,4 @@ Capture these pages at a 1440 × 1320 desktop viewport, including the complete p
 | `/?CountryCode=ES&SampleId=es-valid` | `assets/spanish-profile-form.png` |
 | `/?CountryCode=ES&SampleId=es-invalid-postal` | `assets/spanish-invalid-postal-code.png` |
 
-The current captures use the dark colour scheme. Also check the form at a narrow mobile width before replacing them.
+The captures use the demo's fixed light colour scheme. Also check the form at a narrow mobile width before replacing them.

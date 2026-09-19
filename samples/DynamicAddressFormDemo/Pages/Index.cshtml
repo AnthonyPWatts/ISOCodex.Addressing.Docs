@@ -159,37 +159,54 @@
     <aside class="results-column" aria-label="Address validation result">
         <section class="status-panel @statusClass" data-portfolio-region="validation-result">
             <div class="status-panel__heading">
+                @if (Model.Status is "Valid" or "Invalid")
+                {
+                    <span class="status-panel__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            @if (Model.Status == "Valid")
+                            {
+                                <path d="m5 12 4 4 10-10" />
+                            }
+                            else
+                            {
+                                <path d="m6 6 12 12M18 6 6 18" />
+                            }
+                        </svg>
+                    </span>
+                }
                 <div>
                     <p class="panel-kicker">03 / Validation result</p>
                     <h2>@Model.Status</h2>
                 </div>
             </div>
 
-            @if (Model.FieldIssues.Count > 0)
-            {
-                <ul class="issue-list">
-                    @foreach (var issue in Model.FieldIssues)
-                    {
-                        <li>
-                            <strong>@Model.FieldLabelFor(issue.Field)</strong>
-                            <span>@issue.Message</span>
-                        </li>
-                    }
-                </ul>
-            }
-            else if (Model.FormattedPreview is null)
-            {
-                <p class="status-panel__empty">Enter an address, then select Validate address.</p>
-            }
-            else
-            {
-                <div class="formatted-address">
-                    <p class="formatted-address__label">Formatted address</p>
-                    <address>@Model.FormattedPreview</address>
-                </div>
-            }
-            <p class="validation-note">Checks structure and format. It does not confirm that an address exists.</p>
+            <div class="status-panel__body">
+                @if (Model.FieldIssues.Count > 0)
+                {
+                    <ul class="issue-list">
+                        @foreach (var issue in Model.FieldIssues)
+                        {
+                            <li>
+                                <strong>@Model.FieldLabelFor(issue.Field)</strong>
+                                <span>@issue.Message</span>
+                            </li>
+                        }
+                    </ul>
+                }
+                else if (Model.FormattedPreview is null)
+                {
+                    <p class="status-panel__empty">Enter an address, then select Validate address.</p>
+                }
+                else
+                {
+                    <div class="formatted-address">
+                        <p class="formatted-address__label">Formatted address</p>
+                        <address>@Model.FormattedPreview</address>
+                    </div>
+                }
+            </div>
         </section>
+        <p class="validation-note">Checks structure and format. It does not confirm that an address exists.</p>
 
         <section class="profile-panel" data-portfolio-region="profile-evidence">
             <div class="profile-panel__heading">
