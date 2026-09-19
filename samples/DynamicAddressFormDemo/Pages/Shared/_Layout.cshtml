@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@(ViewData["Description"] ?? "Interactive country-aware address form powered by ISOCodex.Addressing.")" />
+    <title>@ViewData["Title"] · ISOCodex.Addressing</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DynamicAddressFormDemo.styles.css" asp-append-version="true" />
+</head>
+<body class="app-body">
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="brand" asp-area="" asp-page="/Index" aria-label="ISOCodex.Addressing demo home">
+                <span class="brand__mark" aria-hidden="true">ISO</span>
+                <span>
+                    <strong>ISOCodex.Addressing</strong>
+                    <small>Dynamic form test rig</small>
+                </span>
+            </a>
+            <div class="environment-pill">
+                <span class="environment-pill__dot" aria-hidden="true"></span>
+                Interactive demo
+            </div>
+        </div>
+    </header>
+
+    <div class="container app-shell">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container site-footer__inner">
+            <span>Country-aware forms, validation and formatting.</span>
+            <span>Powered by ISOCodex.Addressing</span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

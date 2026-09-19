@@ -1,0 +1,31 @@
+name: Public NuGet examples
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+      - name: Verify published-package examples
+        shell: pwsh
+        run: ./eng/verify-samples.ps1
+      - name: Upload verification evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: sample-evidence
+          path: |
+            artifacts/samples/**/logs/*
+            artifacts/samples/**/package-provenance.json
+            artifacts/framework-demo/**/*.log
+            artifacts/framework-demo/**/asset-selection.json
+            artifacts/framework-demo/**/package-provenance.json

@@ -21,6 +21,6 @@ A separate console demo restored six published ISOCodex packages directly from N
 
 The net462 experiment does not lower the supported 4.7.2 floor, prove execution on an original 4.6.2 runtime, or establish compatibility for every optional adapter. Framework 3.5 is not supported.
 
-The .NET 10 browser demo also consumes public NuGet packages. Demo implementation, test harnesses and CI logs are maintained privately; these documentation repositories contain consumer guidance and selected screenshots.
+Runnable consumer examples are available in the public repositories: see [this repository's samples](../samples/README.md), the [address-form demo](https://github.com/AnthonyPWatts/ISOCodex.Addressing.Docs/tree/main/samples/DynamicAddressFormDemo) and the [Framework verifier](https://github.com/AnthonyPWatts/ISOCodex.Addressing.Docs/tree/main/samples/FrameworkCompatibilityDemo). They restore released packages from NuGet.org; their public verification workflows need no private source access. Library implementation and internal development tests remain in the private repositories.
 
 Earlier package versions do not gain the new targets retrospectively. Refer to [Microsoft's .NET Standard guidance](https://learn.microsoft.com/en-us/dotnet/standard/net-standard) for the Framework platform boundary.

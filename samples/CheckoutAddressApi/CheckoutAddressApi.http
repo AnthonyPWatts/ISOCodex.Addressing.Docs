@@ -1,0 +1,90 @@
+@CheckoutAddressApi_HostAddress = http://localhost:5000
+
+GET {{CheckoutAddressApi_HostAddress}}/countries
+Accept: application/json
+
+###
+
+GET {{CheckoutAddressApi_HostAddress}}/address-profile/ES
+Accept: application/json
+
+###
+
+POST {{CheckoutAddressApi_HostAddress}}/checkout/validate-address
+Content-Type: application/json
+
+{
+  "line1": "10 Downing Street",
+  "line2": null,
+  "city": "London",
+  "stateOrProvince": null,
+  "postalCode": "SW1A 2AA",
+  "countryCode": "GB"
+}
+
+###
+
+POST {{CheckoutAddressApi_HostAddress}}/checkout/preview-address
+Content-Type: application/json
+
+{
+  "line1": "1600 Pennsylvania Avenue NW",
+  "line2": null,
+  "city": "Washington",
+  "stateOrProvince": "DC",
+  "postalCode": "20500",
+  "countryCode": "US"
+}
+
+###
+
+POST {{CheckoutAddressApi_HostAddress}}/checkout/validate-address
+Content-Type: application/json
+
+{
+  "line1": "10 Downing Street",
+  "line2": null,
+  "city": "London",
+  "stateOrProvince": null,
+  "postalCode": "NOT-A-POSTCODE",
+  "countryCode": "GB"
+}
+
+###
+
+POST {{CheckoutAddressApi_HostAddress}}/checkout/validate-address
+Content-Type: application/json
+
+{
+  "line1": "",
+  "line2": null,
+  "city": "",
+  "stateOrProvince": null,
+  "postalCode": "",
+  "countryCode": "FR"
+}
+
+###
+
+POST {{CheckoutAddressApi_HostAddress}}/checkout/order
+Content-Type: application/json
+
+{
+  "customerEmail": "customer@example.test",
+  "billingAddress": {
+    "line1": "24 Sussex Drive",
+    "line2": null,
+    "city": "Ottawa",
+    "stateOrProvince": "ON",
+    "postalCode": "K1M 1M4",
+    "countryCode": "CA"
+  },
+  "shippingAddress": {
+    "line1": "Calle Mayor 10",
+    "line2": "3 C",
+    "city": "Madrid",
+    "stateOrProvince": "Madrid",
+    "postalCode": "28013",
+    "countryCode": "ES"
+  }
+}

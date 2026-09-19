@@ -1,0 +1,74 @@
+{
+  "validGb": {
+    "line1": "10 Downing Street",
+    "line2": null,
+    "city": "London",
+    "stateOrProvince": null,
+    "postalCode": "SW1A 2AA",
+    "countryCode": "GB"
+  },
+  "validUs": {
+    "line1": "1600 Pennsylvania Avenue NW",
+    "line2": null,
+    "city": "Washington",
+    "stateOrProvince": "DC",
+    "postalCode": "20500",
+    "countryCode": "US"
+  },
+  "validCa": {
+    "line1": "24 Sussex Drive",
+    "line2": null,
+    "city": "Ottawa",
+    "stateOrProvince": "ON",
+    "postalCode": "K1M 1M4",
+    "countryCode": "CA"
+  },
+  "validEs": {
+    "line1": "Calle Mayor 10",
+    "line2": "3 C",
+    "city": "Madrid",
+    "stateOrProvince": "Madrid",
+    "postalCode": "28013",
+    "countryCode": "ES"
+  },
+  "validFr": {
+    "line1": "10 Rue de Rivoli",
+    "line2": null,
+    "city": "Paris",
+    "stateOrProvince": null,
+    "postalCode": "75001",
+    "countryCode": "FR"
+  },
+  "validIe": {
+    "line1": "1 College Green",
+    "line2": null,
+    "city": "Dublin",
+    "stateOrProvince": "Dublin",
+    "postalCode": "D02 X285",
+    "countryCode": "IE"
+  },
+  "invalidPostcode": {
+    "line1": "10 Downing Street",
+    "line2": null,
+    "city": "London",
+    "stateOrProvince": null,
+    "postalCode": "NOT-A-POSTCODE",
+    "countryCode": "GB"
+  },
+  "missingRequiredFields": {
+    "line1": "",
+    "line2": null,
+    "city": "",
+    "stateOrProvince": null,
+    "postalCode": "",
+    "countryCode": "FR"
+  },
+  "unsupportedCountry": {
+    "line1": "1 Market Street",
+    "line2": null,
+    "city": "Sydney",
+    "stateOrProvince": "NSW",
+    "postalCode": "2000",
+    "countryCode": "AU"
+  }
+}

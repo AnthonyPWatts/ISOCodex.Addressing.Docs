@@ -1,0 +1,11 @@
+customerId,line1,line2,city,stateOrProvince,postalCode,countryCode
+C001,10 Downing Street,,London,,SW1A 2AA,GB
+C002,1 College Green,,Dublin,Dublin,D02 X285,ie
+C003,10 Rue de Rivoli,,Paris,,75001,FR
+C004,Calle Mayor 10,3 C,Madrid,Madrid,28013,ES
+C005,10 Downing Street,,London,,BADPOST,GB
+C006,1 College Green,,Dublin,Dublin,BAD CODE,IE
+C007,10 Rue de Rivoli,,,,75001,FR
+C008,,Suite 20,London,,SW1A 2AA,GB
+C009,  1 Market Street  ,, Sydney , NSW , 2000 ,AU
+C010,"Unclosed quote,,London,,SW1A 2AA,GB

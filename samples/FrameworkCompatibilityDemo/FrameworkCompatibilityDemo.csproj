@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net462;net472</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>false</IsPackable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NuGetAuditMode>all</NuGetAuditMode>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ISOCodex.Countries" Version="1.1.1" />
+    <PackageReference Include="ISOCodex.Addressing" Version="2.1.1" />
+    <PackageReference Include="ISOCodex.Addressing.Spain" Version="2.1.1" />
+    <PackageReference Include="ISOCodex.Addressing.France" Version="2.1.1" />
+    <PackageReference Include="ISOCodex.Addressing.Ireland" Version="2.1.1" />
+    <PackageReference Include="ISOCodex.Currency" Version="1.1.1" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+</Project>

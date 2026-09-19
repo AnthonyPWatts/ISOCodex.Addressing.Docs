@@ -2,7 +2,21 @@
 
 Country-aware postal address models, validation, formatting and address-entry profiles for .NET.
 
-This is the public documentation and issue tracker. The library implementation and development history are maintained in a separate private repository. Install the published packages from NuGet; cloning this repository provides documentation only.
+This repository contains public documentation, runnable examples and the consumer issue tracker. The library implementation and development history are maintained in a separate private repository. Install the published packages from NuGet; clone this repository to run the examples against published NuGet packages.
+
+## Try it locally
+
+With the .NET 10 SDK installed, clone this public repository and run:
+
+```powershell
+git clone https://github.com/AnthonyPWatts/ISOCodex.Addressing.Docs.git
+cd ISOCodex.Addressing.Docs
+dotnet run --project samples/DynamicAddressFormDemo --no-launch-profile --urls http://localhost:5001
+```
+
+[Browse all runnable examples](samples/README.md). They use published NuGet packages and need no private repository access.
+
+Open [the address form](http://localhost:5001/?CountryCode=ES&SampleId=es-valid) and switch between the supplied scenarios.
 
 ## Install
 
@@ -32,7 +46,7 @@ dotnet add package ISOCodex.Addressing --version 2.1.1
 
 ## Address-entry example
 
-The demo uses published NuGet packages to build a country-aware form. Its implementation is maintained privately.
+The [runnable address-form demo](samples/DynamicAddressFormDemo/README.md) uses published NuGet packages to build a country-aware form.
 
 ![Valid Spanish address](assets/spanish-profile-form.png)
 
@@ -44,4 +58,4 @@ Include package versions, target framework, expected behaviour and a small repro
 
 ## Licence and source availability
 
-The documentation is provided under the [MIT licence](LICENSE). Published packages retain their declared licences. Private source hosting does not revoke rights already granted for earlier distributions. ISOCodex is not an official ISO product or endorsed by ISO.
+The documentation and sample applications are provided under the [MIT licence](LICENSE). Published packages retain their declared licences. Private source hosting does not revoke rights already granted for earlier distributions. ISOCodex is not an official ISO product or endorsed by ISO.
