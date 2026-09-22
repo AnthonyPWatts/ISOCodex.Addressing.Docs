@@ -3,6 +3,7 @@
 !*/
 !*.md
 !LICENSE
+!/.gitattributes
 !.gitignore
 !assets/*.png
 

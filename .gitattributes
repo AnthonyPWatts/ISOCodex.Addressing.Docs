@@ -1,0 +1,5 @@
+# Include C# examples in GitHub language statistics.
+samples/**/*.cs linguist-documentation=false
+
+# Exclude verification scripts from language statistics.
+*.ps1 linguist-detectable=false
