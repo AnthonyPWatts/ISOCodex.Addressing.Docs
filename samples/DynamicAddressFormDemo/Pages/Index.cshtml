@@ -21,7 +21,7 @@
 <section class="demo-hero">
     <div>
         <p class="eyebrow">ISOCodex / Addressing</p>
-        <h1>Country-aware<br />address form</h1>
+        <h1>Country-aware address form</h1>
     </div>
     <p class="demo-hero__summary">
         Try an address from Spain, France or Ireland. The country profile sets
@@ -114,7 +114,7 @@
                     continue;
                 }
 
-                <div class="address-field">
+                <div class="address-field @(field.Field is AddressField.AddressLine1 or AddressField.AddressLine2 ? "address-field--wide" : "")">
                     <label class="form-label" for="@inputName">
                         @field.Label
                         @if (field.IsRequired)

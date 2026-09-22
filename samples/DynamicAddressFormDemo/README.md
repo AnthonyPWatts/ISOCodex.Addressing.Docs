@@ -22,11 +22,13 @@ For each country, load the valid and invalid samples. Correct the invalid field 
 
 ## Update the screenshots
 
-Capture these pages at a 1440 × 1320 desktop viewport, including the complete page, with **View profile JSON** collapsed:
+Capture these pages at a **1600 × 900** desktop viewport with **View profile JSON** collapsed. Use 100% browser zoom and a device scale factor of 1, wait for the fonts to load, and save viewport-only PNGs (not full-page captures). Each exported file must be exactly 1600 × 900 pixels.
 
 | Page | Output from the repository root |
 | --- | --- |
 | `/?CountryCode=ES&SampleId=es-valid` | `assets/spanish-profile-form.png` |
 | `/?CountryCode=ES&SampleId=es-invalid-postal` | `assets/spanish-invalid-postal-code.png` |
 
-The captures use the demo's fixed light colour scheme. Also check the form at a narrow mobile width before replacing them.
+The captures use the demo's fixed light colour scheme. At desktop widths of 1100 pixels and above, the shorter introduction, paired form fields and compact profile facts keep the complete form and validation result visible together. Address lines retain the full form width; input text and controls keep their normal size. Do not resize existing images or crop away fields, errors or results.
+
+Check that the valid capture shows the Spanish labels, province selection and formatted address. The invalid capture must show `ABC`, its field error and the **Invalid** result together. Before replacing the assets, exercise the valid/invalid sample flows and correct an invalid field using **Validate address**. Also check at a 375-pixel mobile width, where the form and result stack vertically without horizontal scrolling.
