@@ -9,6 +9,9 @@
 
 # Public example files approved in eng/public-sample-files.txt.
 !/.github/workflows/samples.yml
+!/.github/dependabot.yml
+!/.github/nuget-audit.config
+!/.github/workflows/dependency-audit.yml
 !/NuGet.Config
 !/eng/verify-samples.ps1
 !/global.json

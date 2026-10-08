@@ -1,0 +1,45 @@
+name: Dependency audit
+
+on:
+  pull_request:
+  push:
+    branches: [main, master]
+  schedule:
+    - cron: "43 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-audit-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: NuGet dependency audit
+    # Windows also supports restoring the retained .NET Framework examples.
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          global-json-file: global.json
+      - name: Audit every tracked project and its transitive packages
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $true
+          $projects = @(git ls-files -- '*.csproj' '*.fsproj' '*.vbproj')
+          if ($projects.Count -eq 0) { throw 'No tracked projects were found; audit coverage is unknown.' }
+          foreach ($project in $projects) {
+            Write-Host "Auditing $project"
+            dotnet restore $project --force-evaluate --no-http-cache --configfile .github/nuget-audit.config -p:NuGetAudit=true -p:NuGetAuditMode=all -p:NuGetAuditLevel=low '-warnaserror:NU1900,NU1901,NU1902,NU1903,NU1904,NU1905'
+          }
+          "Audited $($projects.Count) tracked projects, including transitive packages. No unsuppressed known vulnerabilities were reported." >> $env:GITHUB_STEP_SUMMARY
+          "This check does not certify package trust or establish whether a published release is affected." >> $env:GITHUB_STEP_SUMMARY
