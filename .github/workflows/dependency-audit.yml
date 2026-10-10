@@ -5,7 +5,9 @@ on:
   push:
     branches: [main, master]
   schedule:
-    - cron: "43 7 * * *"
+    # GitHub schedule events can be delayed or dropped. Use an early run and an independent fallback.
+    - cron: "37 1 * * *"
+    - cron: "37 7 * * *"
   workflow_dispatch:
 
 permissions:
